@@ -1,0 +1,138 @@
+@font-face {
+  font-family: 'MouseMemoirs';
+  font-style: 'regular';
+  src: url('/fonts/MouseMemoirs-Regular-BPzfstri.ttf') format('truetype');
+}
+
+@import 'tailwindcss';
+
+:root {
+  --blue-500: hsl(230.15, 56.3%, 46.67%); /* from --bg-from */
+  --blue-900: hsl(230.083, 100%, 23.725%); /* from --bg-to (alpha removed) */
+  --slate-900: #243041;
+  /* Indigo */
+  --indigo-300: hsl(222.769, 100%, 61.765%); /* from --border-from */
+  --indigo-900: hsl(244.091, 75.862%, 22.745%); /* from --border-to */
+  /* Pink */
+  --pink-300: #fe71fe;
+  --pink-500: hsl(300, 98.601%, 71.961%); /* from --pink */
+  --pink-900: #9d2df5;
+}
+
+@theme inline {
+  --font-mouse: 'MouseMemoirs', sans-serif;
+  --color-blue-500: var(--blue-500); /* gradient-start */
+  --color-blue-900: var(--blue-900); /* gradient-end */
+  --color-slate-900: var(--slate-900);
+  --color-indigo-300: var(--indigo-300); /* border-from */
+  --color-indigo-900: var(--indigo-900); /* border-to*/
+  --color-pink-300: var(--pink-300);
+  --color-pink-500: var(--pink-500);
+  --color-pink-900: var(--pink-900);
+  --shadow-inset:
+    inset 0 0.5rem 0 0.05rem var(--indigo-300),
+    0 0.6rem 0 0.2rem var(--indigo-900);
+  --gradient-action: 180deg, var(--pink-300) 16.42%, var(--indigo-300);
+  --shadow-action:
+    inset 0 -0.8rem 0 0.2rem var(--pink-900), 0 0.4rem 0 0.5rem var(--slate-900);
+  --shadow-inset-sm:
+    inset 0 0.2rem 0 0.05rem var(--indigo-300),
+    0 0.2rem 0 0.1rem var(--indigo-900);
+  --shadow-inset-xs:
+    inset 0.1rem 0.6rem 0 0.3rem var(--indigo-300),
+    0 0.2rem 0 0.3rem var(--indigo-900);
+  --shadow-action-sm:
+    inset 0 0.2rem 0 0.1rem var(--pink-900), 0 0.1rem 0 0.3rem var(--slate-900);
+  --dialog-animation: slideDown 0.3s ease-in-out;
+}
+@layer components {
+  .text-fill-transparent {
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes expand-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes expand-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Tailwind-compatible dialog animations */
+@keyframes slide-down {
+  from {
+    transform: translateY(-100vh) translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(-50%) translateX(-50%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh) translateX(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.65;
+  }
+}
+
+/* Tailwind animation utilities */
+.animate-slide-down {
+  animation: slide-down 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-in forwards;
+}
+
+/* Dialog initial state - hidden at top */
+#menu-dialog:not([open]) {
+  transform: translateY(-100vh) translateX(-50%);
+  opacity: 0;
+}
+
+/* Dialog backdrop animation */
+dialog[open]::backdrop {
+  animation: fade-in-backdrop 0.3s ease-out forwards;
+}
+
+dialog::backdrop {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--blue-500) 20%, transparent),
+    var(--blue-900)
+  );
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0.65;
+  width: 100%;
+  height: 100%;
+}

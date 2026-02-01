@@ -1,0 +1,98 @@
+---
+import Title from './Title.astro';
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/src/utils/index';
+import { DialogPopup } from '@/src/components/Dialog';
+interface Props extends HTMLAttributes<'button'> {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<button
+  id="menu-button"
+  class={cn(
+    'fixed inset-0 flex size-16 cursor-pointer items-center justify-center rounded-full bg-linear-(--gradient-action) shadow-[inset_0_-0.3rem_0_.2rem_#9d2df5,0_0.2rem_0_0.1rem_#243041] md:top-16 md:left-8 lg:top-22 lg:left-1/8 xl:size-20',
+    className,
+  )}
+  slot="action-button"
+>
+  <img
+    src="/images/icon-menu.svg"
+    alt="Menu"
+  />
+</button>
+<DialogPopup id="menu-dialog">
+  <div class="relative flex flex-col items-center justify-center gap-8 pt-10">
+    <Title
+      title="Paused"
+      class="absolute -top-28 z-20 text-9xl xl:text-9xl"
+    />
+    <button
+      class="shadow-inset-sm cursor-pointer rounded-full px-14 py-3 text-3xl"
+      id="close-button"
+    >
+      Continue
+    </button>
+    <button
+      id="new-category-button"
+      class="shadow-inset-sm cursor-pointer rounded-full px-18 py-3 text-3xl"
+    >
+      New Category
+    </button>
+    <button
+      id="quit-game-button"
+      class="shadow-action-sm cursor-pointer rounded-full bg-linear-(--gradient-action) px-14 py-3 text-3xl"
+    >
+      Quit Game
+    </button>
+  </div>
+</DialogPopup>
+
+<script is:inline>
+  const dialog = document.getElementById('menu-dialog');
+  const openButton = document.getElementById('menu-button');
+  const closeButton = document.getElementById('close-button');
+  const newCategoryButton = document.getElementById('new-category-button');
+  const quitGameButton = document.getElementById('quit-game-button');
+
+  // Handle opening animation
+  openButton.addEventListener('click', () => {
+    dialog.showModal();
+    // Remove any closing animation classes
+    dialog.classList.remove('animate-slide-up');
+    // Add opening animation
+    dialog.classList.add('animate-slide-down');
+    // Force reflow to ensure animation runs
+    dialog.offsetHeight;
+  });
+
+  // Handle closing animation with optional redirect
+  const closeDialog = (redirectUrl = null) => {
+    // Remove opening animation
+    dialog.classList.remove('animate-slide-down');
+    // Add closing animation
+    dialog.classList.add('animate-slide-up');
+    setTimeout(() => {
+      dialog.close();
+      // Reset classes for next open
+      dialog.classList.remove('animate-slide-up');
+      // Navigate if a redirect URL was provided
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
+    }, 300);
+  };
+
+  closeButton.addEventListener('click', () => closeDialog());
+  newCategoryButton.addEventListener('click', () => closeDialog('/categories'));
+  quitGameButton.addEventListener('click', () => closeDialog('/'));
+
+  // Handle backdrop click to close
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      closeDialog();
+    }
+  });
+</script>

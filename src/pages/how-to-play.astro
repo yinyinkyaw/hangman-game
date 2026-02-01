@@ -1,0 +1,32 @@
+---
+import Layout from '@/src/layouts/Layout.astro';
+import { instructions } from '@/src/assets/data';
+import Title from '@/src/components/Title.astro';
+import MainLayout from '@/src/layouts/MainLayout.astro';
+import BackButton from '@/src/components/BackButton.astro';
+---
+
+<Layout>
+  <MainLayout>
+    <BackButton />
+    <Title title="How to Play" />
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      {
+        instructions.map((instruction, index) => (
+          <div
+            key={index}
+            class="flex flex-col items-center justify-center gap-8 rounded-xl bg-white p-10 pb-20"
+          >
+            <span class="text-6xl font-bold text-indigo-300">0{index + 1}</span>
+            <h2 class="mb-4 text-center text-5xl font-bold text-blue-900">
+              {instruction.title}
+            </h2>
+            <p class="px-8 text-center text-2xl text-slate-900/60">
+              {instruction.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </MainLayout>
+</Layout>

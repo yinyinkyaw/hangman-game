@@ -1,0 +1,40 @@
+---
+import { word_categories } from '@/src/assets/data';
+import Layout from '@/src/layouts/Layout.astro';
+import MainLayout from '@/src/layouts/MainLayout.astro';
+import MenuButton from '@/src/components/MenuButton.astro';
+import Title from '@/src/components/Title.astro';
+import GameApp from '@/src/components/GameApp';
+import { generateRandomWord } from '@/src/utils/generate-word';
+
+export function getStaticPaths() {
+  return word_categories.map((category) => ({
+    params: { category: category.toLowerCase() },
+  }));
+}
+
+const { category } = Astro.params;
+const randomWord = generateRandomWord(category);
+---
+
+<Layout>
+  <MainLayout class="gap-12">
+    <header class="flex w-full items-center">
+      <div class="flex items-center gap-2">
+        <MenuButton
+          class="static"
+          slot="action-button"
+        />
+        <Title
+          title={category}
+          class="align-left mb-0 text-left capitalize"
+        />
+      </div>
+    </header>
+    <GameApp
+      correctWord={randomWord}
+      topic={category}
+      client:load
+    />
+  </MainLayout>
+</Layout>

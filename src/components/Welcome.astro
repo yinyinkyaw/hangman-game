@@ -1,0 +1,36 @@
+---
+import Logo from '@/public/images/logo.svg';
+import PlayIcon from '@/public/images/icon-play.svg';
+---
+
+<div class="flex h-full min-h-screen w-full items-center justify-center">
+  <div
+    class="shadow-inset relative h-fit w-[calc(100%-4rem)] rounded-4xl bg-linear-to-b from-blue-500/20 to-blue-900 p-10 text-white xl:w-xl"
+  >
+    <div class="flex items-center justify-center">
+      <img
+        src={Logo.src}
+        alt="Hangman Logo"
+        class="absolute -top-20 w-80"
+      />
+      <div class="flex flex-col items-center gap-10 pt-20">
+        <a
+          href="/categories"
+          class="shadow-action flex size-52 items-center justify-center rounded-full bg-linear-(--gradient-action)"
+        >
+          <img
+            src={PlayIcon.src}
+            alt="Play Icon"
+            class="mr-2 w-16"
+          />
+        </a>
+        <a
+          href="/how-to-play"
+          class="shadow-inset bg-gradient-start cursor-pointer rounded-full px-14 py-5 text-4xl"
+        >
+          How to Play
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

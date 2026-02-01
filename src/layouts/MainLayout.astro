@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/src/utils/index';
+
+interface Props extends HTMLAttributes<'main'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<main
+  class={cn("mx-auto flex w-[calc(100%-10rem)] flex-col items-center justify-center p-10 xl:w-5/6 xl:p-16", className)}
+  {...rest}
+>
+  <slot name="action-button" />
+  <slot />
+</main>

@@ -1,0 +1,28 @@
+---
+import { word_categories } from '@/src/assets/data';
+import Layout from '@/src/layouts/Layout.astro';
+import MainLayout from '@/src/layouts/MainLayout.astro';
+import Title from '@/src/components/Title.astro';
+import BackButton from '@/src/components/BackButton.astro';
+---
+
+<Layout>
+  <MainLayout>
+    <BackButton />
+    <Title title="Pick a Category" />
+    <section
+      class="mt-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6"
+    >
+      {
+        word_categories.map((category) => (
+          <a
+            href={`/categories/${category.toLowerCase()}`}
+            class="shadow-inset flex w-full justify-center rounded-2xl bg-linear-to-b from-indigo-300 to-blue-900 p-12"
+          >
+            <p class="text-4xl text-white">{category}</p>
+          </a>
+        ))
+      }
+    </section>
+  </MainLayout>
+</Layout>

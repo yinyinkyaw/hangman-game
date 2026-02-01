@@ -1,0 +1,83 @@
+---
+import '@/src/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+
+const expandTransition = {
+  forwards: {
+    old: {
+      name: 'expand-out',
+      duration: '0.3s',
+      easing: 'ease-in',
+      fillMode: 'forwards',
+    },
+    new: {
+      name: 'expand-in',
+      duration: '0.3s',
+      easing: 'ease-out',
+      delay: '0.15s',
+      fillMode: 'backwards',
+    },
+  },
+  backwards: {
+    old: {
+      name: 'expand-out',
+      duration: '0.3s',
+      easing: 'ease-in',
+      fillMode: 'forwards',
+    },
+    new: {
+      name: 'expand-in',
+      duration: '0.3s',
+      easing: 'ease-out',
+      delay: '0.15s',
+      fillMode: 'backwards',
+    },
+  },
+};
+---
+
+<!doctype html>
+<html
+  lang="en"
+  transition:name="root"
+  transition:animate="none"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/logo.svg"
+    />
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <title>Hangman Game</title>
+    <ClientRouter />
+  </head>
+  <body class="relative h-full min-h-screen w-screen">
+    <div
+      class="absolute inset-0 -z-1 bg-[url(../images/background-mobile.svg)] bg-cover bg-center bg-repeat sm:bg-[url(../images/background-tablet.svg)] lg:bg-[url(../images/background-desktop.svg)]"
+    >
+    </div>
+    <main transition:animate={expandTransition}>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    font-family: var(--font-mouse);
+  }
+</style>

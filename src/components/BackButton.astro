@@ -1,0 +1,15 @@
+---
+import BackIcon from '@/public/images/icon-back.svg';
+---
+
+<a
+  href="javascript:history.back()"
+  class="fixed inset-0 flex size-16 items-center justify-center rounded-full bg-linear-(--gradient-action) shadow-[inset_0_-0.3rem_0_.2rem_#9d2df5,0_0.2rem_0_0.1rem_#243041] md:top-16 md:left-8 lg:top-22 lg:left-1/8 xl:size-20"
+  slot="action-button"
+>
+  <img
+    src={BackIcon.src}
+    alt="Back"
+    class="size-6 xl:size-8"
+  />
+</a>
