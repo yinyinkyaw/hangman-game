@@ -2,6 +2,8 @@
 
 A modern, interactive Hangman word-guessing game built with Astro and React.
 
+![Home Page](public/screenshots/home-page.png)
+
 ## 🎮 Features
 
 - Multiple word categories (Animals, Movies, Fruits, Countries, Jobs, Sports, Transportation, Colors)
@@ -50,6 +52,26 @@ A modern, interactive Hangman word-guessing game built with Astro and React.
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **React Context** - State management
+
+## 📸 Screenshots
+
+### Home Page
+![Home Page](public/screenshots/home-page.png)
+
+### How to Play
+![How to Play](public/screenshots/how-to-play.png)
+
+### Category Selection
+![Categories](public/screenshots/categories.png)
+
+### Game Play
+![Play Area](public/screenshots/play-area.png)
+
+### Win Result
+![Win Result](public/screenshots/win-result.png)
+
+### Lose Result
+![Lose Result](public/screenshots/lose-result.png)
 
 ## 🎯 How to Play
 
